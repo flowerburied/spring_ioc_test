@@ -1,4 +1,4 @@
-package com.itheima.reggie.entity;
+package com.example.spring_ioc_test01.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;

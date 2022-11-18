@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0496fc1-5ea8-4936-b088-75309c6df8c0" name="Default Changelist" comment="" />
+    <list default="true" id="b0496fc1-5ea8-4936-b088-75309c6df8c0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring_ioc_test/src/main/java/com/example/spring_ioc_test01/common/R.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring_ioc_test/src/main/java/com/example/spring_ioc_test01/controller/EmployeeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring_ioc_test/src/main/java/com/example/spring_ioc_test01/entity/test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring_ioc_test/src/main/java/com/example/spring_ioc_test01/mapper/EmployeeMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring_ioc_test/src/main/java/com/example/spring_ioc_test01/service/impl/EmployeeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_ioc_test/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_ioc_test/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/spring_ioc_test/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_ioc_test/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spring_ioc_test/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_ioc_test/src/main/java/com/example/spring_ioc_test01/entity/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_ioc_test/src/main/java/com/example/spring_ioc_test01/entity/Employee.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,19 +24,27 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenRunner">
     <option name="jreName" value="1.8" />
   </component>
   <component name="ProjectId" id="2HhbAofcBUE0dNEfWNSdz71NOHw" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
@@ -78,11 +99,33 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1668740122147</updated>
-      <workItem from="1668740125062" duration="7505000" />
+      <workItem from="1668740125062" duration="14114000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spring_ioc_test/src/main/java/com/example/spring_ioc_test01/controller/EmployeeController.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
