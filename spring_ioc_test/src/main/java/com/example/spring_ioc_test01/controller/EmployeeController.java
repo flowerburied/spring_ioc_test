@@ -6,6 +6,7 @@ import com.example.spring_ioc_test01.common.R;
 import com.example.spring_ioc_test01.entity.Employee;
 import com.example.spring_ioc_test01.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
@@ -121,12 +122,39 @@ public class EmployeeController {
         log.info("page={}，pageSize={}，name={}", page, pageSize, name);
 
         //构造分页构造器
-
+        Page pageInfo = new Page(page, pageSize);
         //构造条件构造器
-
+        LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper();
+//        添加过滤条件 eq等值查询 like模糊查询
+//        StringUtils.isNotEmpty(name) 判断是否等于空
+        queryWrapper.eq(StringUtils.isNotEmpty(name), Employee::getName, name);
+//        添加排序条件
+        queryWrapper.orderByDesc(Employee::getUpdateTime);
         //执行查询
+        employeeService.page(pageInfo, queryWrapper);
 
-        return null;
+        return R.success(pageInfo);
+    }
+
+    /**
+     * 根据id修改员工信息
+     *
+     * @param employee
+     * @return
+     */
+    @PutMapping
+    public R<String> update(HttpServletRequest request, @RequestBody Employee employee) {
+
+        log.info(employee.toString());
+
+        Long empId = (Long) request.getSession().getAttribute("employee");
+
+
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(empId);
+        employeeService.updateById(employee);
+        return R.success("员工信息修改成功");
+
     }
 
 }
