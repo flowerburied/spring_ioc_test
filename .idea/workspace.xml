@@ -99,7 +99,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1668740122147</updated>
-      <workItem from="1668740125062" duration="14114000" />
+      <workItem from="1668740125062" duration="14741000" />
     </task>
     <servers />
   </component>
@@ -116,16 +116,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/spring_ioc_test/src/main/java/com/example/spring_ioc_test01/controller/EmployeeController.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

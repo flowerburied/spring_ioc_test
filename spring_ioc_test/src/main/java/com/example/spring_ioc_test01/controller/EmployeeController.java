@@ -1,26 +1,29 @@
 package com.example.spring_ioc_test01.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.spring_ioc_test01.common.R;
 import com.example.spring_ioc_test01.entity.Employee;
 import com.example.spring_ioc_test01.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 @Slf4j
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
+    @Resource
+    EmployeeService employeeService;
+
+
+    private static final String msg = "123";
 
     /**
      * 员工登录
@@ -61,6 +64,69 @@ public class EmployeeController {
         request.getSession().setAttribute("employee", emp.getId());
 
         return R.success(emp);
+    }
+
+    /**
+     * 员工退出
+     *
+     * @param request
+     * @return
+     */
+    @PostMapping("logout")
+    public R<String> logout(HttpServletRequest request) {
+
+        request.getSession().removeAttribute("employee");
+        return R.success("退出成功");
+    }
+
+    /**
+     * 新增员工
+     *
+     * @param employee
+     * @return
+     */
+    @PostMapping
+//    json形式需要添加注解 @RequestBody
+//            HttpServletRequest request获取当前登录用户
+    public R<String> save(HttpServletRequest request, @RequestBody Employee employee) {
+        log.info("新增员工，员工信息：{}", employee);
+
+        //设置初始密码，md5加密
+        employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
+//        设置当前系统时间
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+//获取当前登录用户的id
+//        getAttribute()  方法返回的都是Object类型需要 (Long) 强转
+        Long empId = (Long) request.getSession().getAttribute("employee");
+        employee.setCreateUser(empId);
+        employee.setUpdateUser(empId);
+
+        employeeService.save(employee);  //存入数据库
+
+        return R.success("新增员工成功");
+    }
+
+    /**
+     * 员工信息分页查询
+     *
+     * @param page
+     * @param pageSize
+     * @param name
+     * @return
+     */
+    @GetMapping("/page")
+    public R<Page> page(int page, int pageSize, String name) {
+
+        log.info("page={}，pageSize={}，name={}", page, pageSize, name);
+
+        //构造分页构造器
+
+        //构造条件构造器
+
+        //执行查询
+
+        return null;
     }
 
 }
