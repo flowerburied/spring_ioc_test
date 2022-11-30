@@ -152,10 +152,11 @@ public class EmployeeController {
     @PutMapping
     public R<String> update(HttpServletRequest request, @RequestBody Employee employee) {
 
-        log.info(employee.toString());
+//        log.info(employee.toString());
+//
+//        long id = Thread.currentThread().getId();
+//        log.info("线程id2为:{}", id);
 
-        long id = Thread.currentThread().getId();
-        log.info("线程id2为:{}", id);
 //        Long empId = (Long) request.getSession().getAttribute("employee");
 
 

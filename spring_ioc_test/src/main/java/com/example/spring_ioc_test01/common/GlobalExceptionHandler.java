@@ -37,4 +37,19 @@ public class GlobalExceptionHandler {
 //未知错误
         return R.error("系统繁忙，请稍后重试！");
     }
+
+    /**
+     * 异常处理方法
+     *
+     * @return
+     */
+    @ExceptionHandler(CustomException.class)
+    public R<String> exceptionHandler(CustomException ex) {
+
+        log.error("异常信息：{}", ex.getMessage());
+
+
+        return R.error(ex.getMessage());
+    }
+
 }
