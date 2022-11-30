@@ -2,6 +2,7 @@ package com.example.spring_ioc_test01.filter;
 
 
 import com.alibaba.fastjson.JSON;
+import com.example.spring_ioc_test01.common.BaseContext;
 import com.example.spring_ioc_test01.common.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
@@ -48,12 +49,21 @@ public class LoginCheckFilter implements Filter {
 //        如果不需要处理，则直接放行
         if (check) {  //判断白名单
             log.info("本次请求{}不需要处理", requestURI);
+
+
+
             filterChain.doFilter(request, response); //放行
             return;
         }
 //        判断登录状态，如果已登录，则直接放行
         if (request.getSession().getAttribute("employee") != null) {  //获取登录的缓存
             log.info("用户已登录，用户id为：{}", request.getSession().getAttribute("employee"));
+
+            Long empId = (Long) request.getSession().getAttribute("employee");
+            BaseContext.setCurrentId(empId);
+//            long id = Thread.currentThread().getId();
+//            log.info("线程id1为:{}", id);
+
             filterChain.doFilter(request, response); //放行
             return;
         }

@@ -95,13 +95,13 @@ public class EmployeeController {
         //设置初始密码，md5加密
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
 //        设置当前系统时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
 //获取当前登录用户的id
 //        getAttribute()  方法返回的都是Object类型需要 (Long) 强转
-        Long empId = (Long) request.getSession().getAttribute("employee");
-        employee.setCreateUser(empId);
-        employee.setUpdateUser(empId);
+//        Long empId = (Long) request.getSession().getAttribute("employee");
+//        employee.setCreateUser(empId);
+//        employee.setUpdateUser(empId);
 
         employeeService.save(employee);  //存入数据库
 
@@ -133,6 +133,13 @@ public class EmployeeController {
         //执行查询
         employeeService.page(pageInfo, queryWrapper);
 
+//        return R.success(   //高阶写法 有可能有bug
+//                employeeService.lambdaQuery()
+//                        .eq(StringUtils.isNotEmpty(name), Employee::getName, name)
+//                        .page(new Page(page, pageSize))
+//        );
+
+
         return R.success(pageInfo);
     }
 
@@ -147,11 +154,13 @@ public class EmployeeController {
 
         log.info(employee.toString());
 
-        Long empId = (Long) request.getSession().getAttribute("employee");
+        long id = Thread.currentThread().getId();
+        log.info("线程id2为:{}", id);
+//        Long empId = (Long) request.getSession().getAttribute("employee");
 
 
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(empId);
+//        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setUpdateUser(empId);
         employeeService.updateById(employee);
         return R.success("员工信息修改成功");
 
