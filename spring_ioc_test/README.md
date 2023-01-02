@@ -189,10 +189,54 @@ find / -name helloworld.log
 more ///helloworld.log
 
 ##### 设置静态IP
+ cd /etc/sysconfig/network-scripts/
+
+vim ifcfg-ens33
+
+重启网络服务
+systemctl restart network
 
 
+## Redis
 
+redis是一个基于内存的key-value结构数据库
+相对于mysql的磁盘数据库 ，读写性能高
+适合存储热点数据（热点商品、资讯、新闻）
 
+官网：https://redis.io
+理论查询十万+的QPS
+NoSql指非关系型数据库
 
+应用场景
+缓存
+任务队列
+信息队列
+分布式锁
 
+下载安装
+windows版下载地址: https://github.com/microsoftarchive/redis/releases
+Linux版下载地址: https://download.redis.io/releases/
 
+tar -zxvf redis-4.0.0.tar.gz -C /usr/local
+
+安装Redis的依赖环境gcc,命令：yum install gcc-c++
+
+进入redis目录, make  命令进行编译
+
+进入src目录，进行安装，make install
+
+### 启动和停止Redis
+./redis-server 
+新窗口
+./redis-cli 
+
+查看redis中有哪些key
+keys *
+
+#### 修改redis配置文件在后台运行
+vim redis.conf 
+/dae
+
+修改daemonize no为后台运行
+运行
+ src/redis-server ./redis.conf 
