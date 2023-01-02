@@ -135,6 +135,64 @@ yum install lrzsz.x86_64 //安装yum命令在线安装
 
 rz //上传快捷键
 
+#### 手工打包
+maven 中项目 Lifecycle 中 package
+
+##### 创建目录，将项目jar包放此目录
+mkdir /usr/local/app
+##### 运行项目
+java -jar reggie_take_out-1.0-SNAPSHOT.jar
+##### 后台运行项目,并将日志输出到hello.log文件
+nohup java -jar reggie_take_out-1.0-SNAPSHOT.jar &> hello.log &
+
+##### 停止SpringBoot
+ps -ef | grep java
+
+kill -9 116639    // 116639 线程ID
+
+#### 安装git
+yum list git //列出git安装包
+yum install git //在线安装git
+
+
+#### 安装mavan
+tar -zxvf 
+配置环境变量
+vim /etc/profile
+
+export MAVEN_HOME=/usr/local/apache-maven-3.5.4
+export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
+重新加载文件
+source /etc/profile
+
+mvn -version
+
+
+<localRepository>/usr/local/repo</localRepository>
+
+
+#### 使用Shell脚本文件
+pwd  查看当前目录
+
+读（r）、写（w）、执行（x）
+三级：文件所有者（Owner）、用户组（Group）、其他用户（Other User）
+-rw-r--r--. 代表都有啥权限
+
+##### 为用户授权
+chmod 777 bootStart.sh
+
+ ./bootStart.sh   执行脚本
+
+查找输出日志 
+find / -name helloworld.log
+
+more ///helloworld.log
+
+##### 设置静态IP
+
+
+
+
 
 
 

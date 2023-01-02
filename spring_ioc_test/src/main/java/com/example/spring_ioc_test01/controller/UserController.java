@@ -8,10 +8,7 @@ import com.example.spring_ioc_test01.utils.SMSUtils;
 import com.example.spring_ioc_test01.utils.ValidateCodeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -26,6 +23,13 @@ public class UserController {
 
     @Resource
     UserService userService;
+
+
+    @GetMapping("/hello")
+    public String hello() {
+        System.out.println("hello world");
+        return "OK";
+    }
 
     /**
      * 发送手机验证码
@@ -79,7 +83,7 @@ public class UserController {
             queryWrapper.eq(User::getPhone, phone);
 
             User user = userService.getOne(queryWrapper);
-            log.info("user$={}",user);
+            log.info("user$={}", user);
             if (user == null) {
 
                 //        判断当前手机号对应的用户是否为新用户，如果是新用户就自动完成注册
