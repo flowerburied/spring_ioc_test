@@ -301,7 +301,29 @@ DEL key  //该命令用于在key存在是删除key
 
 https://www.redis.net.cn
 
+##### 在JAVA中操作redis
 
+技术
+Jedis
+Spring Data Redis
+
+redis包
+     <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>3.5.2</version>
+        </dependency>
+
+单元测试包
+<dependency>
+<groupId>junit</groupId>
+<artifactId>junit</artifactId>
+<version>4.12</version>
+</dependency>
+
+
+
+select 1 //切换数据库
 
 
 
