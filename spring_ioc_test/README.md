@@ -325,8 +325,21 @@ redis包
 
 select 1 //切换数据库
 
+##### 重大bug 不能同时存在，不然取不出！！！！！
+127.0.0.1:6379> smembers myset
+1) "d"
+2) "c"
+3) "\xac\xed\x00\x05t\x00\x01b"
+4) "\xac\xed\x00\x05t\x00\x01a"
+5) "\xac\xed\x00\x05t\x00\x01c"
 
+127.0.0.1:6379> srem myset d c
+(integer) 2
 
-
+127.0.0.1:6379> smembers myset
+1) "\xac\xed\x00\x05t\x00\x01b"
+2) "\xac\xed\x00\x05t\x00\x01a"
+3) "\xac\xed\x00\x05t\x00\x01c"
+127.0.0.1:6379>
 
 
