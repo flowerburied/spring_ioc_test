@@ -8,6 +8,8 @@ import com.example.spring_ioc_test01.utils.SMSUtils;
 import com.example.spring_ioc_test01.utils.ValidateCodeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +32,9 @@ public class UserController {
     @Resource
     RedisTemplate redisTemplate;
 
+    @Resource
+    CacheManager cacheManager;
+
     @GetMapping("/hello")
     public String hello() {
         System.out.println("hello world");
@@ -38,15 +43,21 @@ public class UserController {
 
     /**
      * 发送手机验证码
+     * CachePut：将方法返回值放入缓存数据
+     * value：缓存的名称，每个缓存名称下面可以有多个key
+     * key：缓存的key
      *
      * @param user
      * @return
      */
+//    @CachePut(value = "userCache",key = "#result.id")
+    @CachePut(value = "userCache", key = "#user.phone")
     @PostMapping("/sendMsg")
-    public R<String> sendMsg(@RequestBody User user, HttpSession session) {
+    public User sendMsg(@RequestBody User user, HttpSession session) {
 
 //        获取手机号
         String phone = user.getPhone();
+        User user1 = new User();
         if (StringUtils.isNotEmpty(phone)) {
 
 //        生成随机的4位验证码
@@ -62,9 +73,9 @@ public class UserController {
 //        调用阿里云提供的短信api
 //            SMSUtils.sendMessage("验证码短信", "SMS_267145188", phone, code);
 
-            return R.success("手机验证码短信发送成功");
+            return user1;
         }
-        return R.error("手机验证码短信发送失败");
+        return user1;
 
     }
 
