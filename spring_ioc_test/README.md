@@ -343,3 +343,28 @@ select 1 //切换数据库
 127.0.0.1:6379>
 
 
+### Redis 优化
+maven坐标
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+
+配置文件
+
+spring:
+    redis:
+        host: localhost
+        port: 6379
+        database: 0  #0号数据库  默认16个数据库
+        jedis:
+        #Redis连接池配置
+          pool:
+            max-active: 8 #最大连接数
+            max-wait: 1ms  #连接池最大阻塞等待时间
+            max-idle: 4 #连接池中最大空闲连接
+            min-idle: 0 #连接池的最小空闲连接
+
+condig中的配置类RedisConfig
+

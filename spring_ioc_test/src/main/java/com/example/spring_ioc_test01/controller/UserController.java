@@ -8,11 +8,13 @@ import com.example.spring_ioc_test01.utils.SMSUtils;
 import com.example.spring_ioc_test01.utils.ValidateCodeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 //测试git
@@ -24,6 +26,9 @@ public class UserController {
     @Resource
     UserService userService;
 
+
+    @Resource
+    RedisTemplate redisTemplate;
 
     @GetMapping("/hello")
     public String hello() {
@@ -48,7 +53,12 @@ public class UserController {
             String code = ValidateCodeUtils.generateValidateCode(4).toString();
             log.info("code={}", code);
             //        需要将生成的验证码保存
-            session.setAttribute(phone, code);
+//            session.setAttribute(phone, code);
+
+//            将生成的验证码缓存到redis中，并且设置有效期5分 钟
+
+            redisTemplate.opsForValue().set(phone, code, 5, TimeUnit.MINUTES);
+
 //        调用阿里云提供的短信api
 //            SMSUtils.sendMessage("验证码短信", "SMS_267145188", phone, code);
 
@@ -73,7 +83,11 @@ public class UserController {
 //        获取验证码
         String code = map.get("code").toString();
 //        从Session中获取保存的验证码
-        Object codeInSession = session.getAttribute(phone);
+//        Object codeInSession = session.getAttribute(phone);
+        //        从redis中获取保存的验证码
+        Object codeInSession = redisTemplate.opsForValue().get(phone);
+
+
 //        进行验证码的比较（页面提交的验证码和Seccion中保存的验证码比较）
         if (codeInSession != null && codeInSession.equals(code)) {
 
@@ -94,6 +108,10 @@ public class UserController {
             }
 
             session.setAttribute("user", user.getId());
+
+//            如果用户登录成功则删除redis中缓存的验证码
+            redisTemplate.delete(phone);
+
             return R.success(user);
         }
 
