@@ -29,16 +29,50 @@ spring:
 #        max-idle: 4 #连接池中最大空闲连接
 #        min-idle: 0 #连接池的最小空闲连接
 #    password: 123456
+  shardingsphere:
+    datasource:
+      names:
+        master,slave
+      # 主数据源
+      master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://192.168.209.128:3306/rw?characterEncoding=utf-8
+        username: root
+        password: root
+      # 从数据源
+      slave:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://192.168.209.138:3306/rw?characterEncoding=utf-8
+        username: root
+        password: root
+    masterslave:
+      # 读写分离配置
+      load-balance-algorithm-type: round_robin #轮询
+      # 最终的数据源名称
+      name: dataSource
+      # 主库数据源名称
+      master-data-source-name: master
+      # 从库数据源名称列表，多个逗号分隔
+      slave-data-source-names: slave
+    props:
+      sql:
+        show: true #开启SQL显示，默认false
+  main:
+    allow-bean-definition-overriding: true
+
 #mybatis plus 设置
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
       # 关闭MP3.0自带的banner
-      banner: false
-  db-config:
+      #banner: false
+    db-config:
     #主键类型  0:"数据库ID自增",1:"该类型为未设置主键类型", 2:"用户输入ID",3:"全局唯一ID (数字类型唯一ID)", 4:"全局唯一ID UUID",5:"字符串全局唯一ID (idWorker 的字符串表示)";
-    id-type: ASSIGN_ID
+      id-type: ASSIGN_ID
   # 默认数据库表下划线命名
   #table-underline: true
 

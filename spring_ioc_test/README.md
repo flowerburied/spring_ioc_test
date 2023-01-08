@@ -95,6 +95,8 @@ yum update
 systemctl status mysqld //查看mysql服务状态
 systemctl start mysqld //启动mysql服务
 
+systemctl restart mysqld //重启mysql服务
+
 systemctl enable mysqld //开机启动mysql服务
 
 netstat -tunlp  //查看已启动的服务
@@ -128,7 +130,30 @@ exit //退出
 
 show databases;  //查看数据库
 
+#### 主从复制
+主
+GRANT REPLICATION SLAVE ON *.* to 'xiaoming'@'%' identified by 'Root@123456';
+
+show master status;
+
+从
+
+change master to master_host='192.168.209.128',master_user='xiaoming',master_password='Root@123456',master_log_file='mysql-bin.000005',master_log_pos=154;
+
+##### 停止线程 
+stop slave;
+
+start slave;
+
+##### 查看从库
+show slave status;
+
+!!!!!! 初始库必须一样 !!!!!!!
+否则会Slave_SQL_Running no
+
+
 #### 安装lrzsz
+
 
 yum list lrzsz //搜索lrzsz安装包
 yum install lrzsz.x86_64 //安装yum命令在线安装

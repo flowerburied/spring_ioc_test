@@ -43,7 +43,9 @@ public class LoginCheckFilter implements Filter {
                 "/common/**",
                 "/user/sendMsg", //移动端发送短信
                 "/user/login",  //移动端登录
-                "/redisUser/*"
+                "/redisUser/*",
+                "/jdbcUser/*",
+                "/**"
 
         };
 
