@@ -41,6 +41,10 @@ public class UserController {
         return "OK";
     }
 
+
+
+
+
     /**
      * 发送手机验证码
      * CachePut：将方法返回值放入缓存数据
@@ -51,7 +55,7 @@ public class UserController {
      * @return
      */
 //    @CachePut(value = "userCache",key = "#result.id")
-    @CachePut(value = "userCache", key = "#user.phone")
+//    @CachePut(value = "userCache", key = "#user.phone")
     @PostMapping("/sendMsg")
     public User sendMsg(@RequestBody User user, HttpSession session) {
 

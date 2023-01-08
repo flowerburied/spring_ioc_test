@@ -368,3 +368,119 @@ spring:
 
 condig中的配置类RedisConfig
 
+
+
+ctrl+alt+鼠标左键看接口的实现类
+
+
+
+
+## Docker
+开启Docker
+systemctl start docker
+
+查看docker状态
+systemctl status docker
+关闭Docker
+systemctl stop docker
+重启
+systemctl restart docker
+开机启动
+systemctl enable docker
+
+### Docker镜像相关命令
+
+列出本地镜像。
+docker images
+
+查看指定线上镜像
+docker search redis
+
+从线上拉去 redis  :后面为版本号
+docker pull redis
+docker pull redis:5.0
+
+删除指定镜像  c5da061a611a为IMAGE ID 
+docker rmi c5da061a611a
+
+删除 也可以通过  REPOSITORY:TAG 来指定删除
+docker rmi redis:latest
+
+查看所有ID
+docker images -q
+
+!!!删除所有镜像！！！
+docker rmi `docker images -q`
+
+### Docker 容器
+
+创建容器  -i表示该软件一直保存运行 t分配终端
+--name表示给容器起名字
+redis:latest 软件的 REPOSITORY:TAG
+/bin/bash  打开脚本一样的东西
+
+#### 第一种创建容器
+docker run -it --name=c1 centos:7 /bin/bash
+
+退出容器
+exit
+
+查看现在正在运行的容器
+docker ps
+
+查看现在历史运行的容器
+docker ps -a
+#### 第二种创建容器
+
+d代表后台运行
+docker run -id --name=c2 centos:7 /bin/bash
+
+进入后台容器
+docker exec -it c2 /bin/bash
+
+
+### 查看版本
+docker inspect jenkins
+
+docker pull jenkins:2.32.3
+
+
+docker run -u root -d --name jenkins_01 -p 5000:8080 -p 50000:50000 -v /home/jenkins_home:/var/jenkins_home jenkins:2.32.3
+
+#### docker 停止容器
+docker stop jenkins_01
+#### docker 启动容器
+docker start jenkins_01
+
+#### docker 删除容器
+docker rm jenkins_01
+
+### 数据卷
+
+启动 挂载
+docker run -it --name=c1 -v /root/data:/root/data_container centos:7 /bin/bash
+
+#### 学习测试数据卷
+
+创建
+touch itheima.txt
+
+创建并写入
+echo itcast > a.txt
+
+查看文件内容
+cat a.txt 
+
+
+docker run -it --name=c1 -v 
+
+
+
+
+tar -xvf node-v14.17.0-linux-x64.tar.xz
+
+export PATH=$PATH:/usr/local/node/node-v14.17.0-linux-x64/bin
+
+ln -s /usr/local/node/node-v14.17.0-linux-x64/bin/node /usr/local/bin/
+ln -s /usr/local/node/node-v14.17.0-linux-x64/bin/npm /usr/local/bin/
+
