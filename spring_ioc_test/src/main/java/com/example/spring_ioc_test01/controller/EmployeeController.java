@@ -99,8 +99,8 @@ public class EmployeeController {
 //        employee.setUpdateTime(LocalDateTime.now());
 //获取当前登录用户的id
 //        getAttribute()  方法返回的都是Object类型需要 (Long) 强转
-//        Long empId = (Long) request.getSession().getAttribute("employee");
-//        employee.setCreateUser(empId);
+        Long empId = (Long) request.getSession().getAttribute("employee");
+        employee.setCreateUser(empId);
 //        employee.setUpdateUser(empId);
 
         employeeService.save(employee);  //存入数据库
