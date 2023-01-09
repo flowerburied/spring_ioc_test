@@ -509,3 +509,81 @@ export PATH=$PATH:/usr/local/node/node-v14.17.0-linux-x64/bin
 ln -s /usr/local/node/node-v14.17.0-linux-x64/bin/node /usr/local/bin/
 ln -s /usr/local/node/node-v14.17.0-linux-x64/bin/npm /usr/local/bin/
 
+
+
+
+## Nginx 学习
+
+### 下载安装
+安装依赖包
+
+
+ yum -y install gcc pcre-devel zlib-devel openssl openssl-devel
+ 
+ 安装wget
+ yum install wget
+ 
+ 下载nginx安装包
+ wget https://nginx.org/download/nginx-1.16.1.tar.gz
+ 
+ 解压
+ tar -zxvf nginx-1.16.1.tar.gz 
+ 
+ 创建nginx目录
+ mkdir -p /usr/local/nginx
+ 
+ ./conf
+ 安装到指定目录
+ ./configure --prefix=/usr/local/nginx
+ 
+ 正式安装
+ make && make install
+ 
+ 安装Tree命令
+yum install tree
+ 
+在sbin目录下查看nginx版本
+./nginx -v
+
+查看nginx配置文件正确性
+./nginx -t
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
