@@ -548,6 +548,74 @@ yum install tree
 查看nginx配置文件正确性
 ./nginx -t
 
+启动nginx
+./nginx
+
+停止nginx
+./nginx -s stop
+
+启动完成查看nginx进程
+ps -ef|grep nginx
+
+查看nginx   默认80端口
+http://192.168.209.128/
+
+查看日志
+more access.log
+
+查看进程id文件
+-rw-r--r--. 1 root root   5 Jan  9 22:15 nginx.pid
+
+重新加载配置文件
+./nginx -s reload
+
+配置Nginx环境变量
+vim /etc/profile
+
+重启配置文件
+source /etc/profile
+ 
+ 
+ 拷贝文件到指定目录
+ cp hello.html /usr/local/nginx/html/
+ 
+ 
+ 文件内编辑查看行数
+ set nu
+ ### 配置文件讲解
+ 
+
+ 
+  #### nginx运行相关的全局配置
+ worker_processes  1;
+ 
+  #### 网络连接相关配置
+ events {
+     worker_connections  1024;
+ }
+ 
+  #### nginx运行相关的全局配置
+ http {
+     include       mime.types;
+     default_type  application/octet-stream;
+     sendfile        on;
+     keepalive_timeout  65;
+     server {
+        listen       80;  //监听80端口
+        server_name  localhost;  //指定服务器名称、域名
+         location / {  #匹配客户端请求url
+            root   html;  //默认加载html目录中的资源
+            index  index.html index.htm;  //默认首页
+         }
+          error_page   500 502 503 504  /50x.html;
+            location = /50x.html {
+            root   html;
+          }
+    }
+ }
+ 
+ 
+ ### 反向代理
  
  
  
