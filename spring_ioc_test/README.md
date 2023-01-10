@@ -469,7 +469,7 @@ docker inspect jenkins
 
 docker pull jenkins:2.32.3
 
-
+映射jenkins
 docker run -u root -d --name jenkins_01 -p 5000:8080 -p 50000:50000 -v /home/jenkins_home:/var/jenkins_home jenkins:2.32.3
 
 #### docker 停止容器
@@ -499,15 +499,120 @@ cat a.txt
 
 docker run -it --name=c1 -v 
 
+#### 数据卷容器
+
+docker run -it --name=c3 -v /volume centos:7 /bin/bash
+
+查看容器详解
+docker inspect c1
+
+删除docker 多容器
+docker rm c1 c2 c3 c4
+
+创建数据卷容器
+docker run -it --name=c3 -v /volume centos:7
+
+查看容器详解
+docker inspect c1
+数据卷目录
+ "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "1724415be8a8e09d4e3dd9f798d0af38aa8ef0f9ce796ca4bf144bfe33c3543a",
+                "Source": "/var/lib/docker/volumes/1724415be8a8e09d4e3dd9f798d0af38aa8ef0f9ce796ca4bf144bfe33c3543a/_data",
+                "Destination": "/volume",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        
+ c1挂载到c3数据卷 (相互绑定)
+ docker run -it --name=c1 --volumes-from c3 centos:7
+  c2挂载到c3数据卷 (相互绑定)
+  docker run -it --name=c2 --volumes-from c3 centos:7
+  
+c3中创建文件
+touch a.txt
+
+### 一、部署MySQL
+
+1. 搜索mysql镜像
+
+```shell
+docker search mysql
+```
+
+2. 拉取mysql镜像
+
+```shell
+docker pull mysql:5.7
+```
+
+3. 创建容器，设置端口映射、目录映射
+
+```shell
+# 在/root目录下创建mysql目录用于存储mysql数据信息
+mkdir ~/mysql
+cd ~/mysql
+```
+
+```shell
+docker run -id \
+-p 3307:3306 \
+--name=c_mysql \
+-v $PWD/conf:/etc/mysql/conf.d \
+-v $PWD/logs:/logs \
+-v $PWD/data:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=123456 \
+mysql:5.6
+```
+
+- 参数说明：
+  - **-p 3307:3306**：将容器的 3306 端口映射到宿主机的 3307 端口。
+  - **-v $PWD/conf:/etc/mysql/conf.d**：将主机当前目录下的 conf/my.cnf 挂载到容器的 /etc/mysql/my.cnf。配置目录
+  - **-v $PWD/logs:/logs**：将主机当前目录下的 logs 目录挂载到容器的 /logs。日志目录
+  - **-v $PWD/data:/var/lib/mysql** ：将主机当前目录下的data目录挂载到容器的 /var/lib/mysql 。数据目录
+  - **-e MYSQL_ROOT_PASSWORD=123456：**初始化 root 用户的密码。
 
 
 
+4. 进入容器，操作mysql
+
+```shell
+docker exec -it c_mysql /bin/bash
+```
+
+5. 使用外部机器连接容器中的mysql
+
+![1573636765632](.\imgs\1573636765632.png)
+
+
+登录mysql
+mysql -uroot -p123456
+查看mysql数据库
+show databases;
+创建测试数据库
+create database db1;
+操作db1数据库
+use db1
+
+使用navicat访问docker中的mysql
+映射端口为3307！！
+
+
+
+#### docker番外
 tar -xvf node-v14.17.0-linux-x64.tar.xz
 
 export PATH=$PATH:/usr/local/node/node-v14.17.0-linux-x64/bin
 
 ln -s /usr/local/node/node-v14.17.0-linux-x64/bin/node /usr/local/bin/
 ln -s /usr/local/node/node-v14.17.0-linux-x64/bin/npm /usr/local/bin/
+
+
+
 
 
 
