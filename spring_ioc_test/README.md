@@ -616,6 +616,26 @@ source /etc/profile
  
  
  ### 反向代理
+ p182 6.40
+ 
+ ###负载均衡
+ p183  
+ 
+ #### 负载均衡策略
+ 轮询  //默认方式
+ weight  //权重方式
+ ip_hash  //依据ip分配方式
+ least_conn  //依据最少连接方式
+ url_hash   //依据url分配方式
+ fair  //依据依据响应时间方式
+ 
+ ## 前后端打包部署
+ Java  打包部署   Tomcat
+ 前端   打包部署   Nginx
+ 
+ 
+ ## YAPI
+ https://github.com/YMFE/yapi
  
  
  

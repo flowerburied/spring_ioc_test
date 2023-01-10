@@ -13,6 +13,7 @@ import com.example.spring_ioc_test01.entity.SetmealDish;
 import com.example.spring_ioc_test01.service.CategoryService;
 import com.example.spring_ioc_test01.service.SetmealDishService;
 import com.example.spring_ioc_test01.service.SetmealService;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/setmeal")
 @Slf4j
+@Api(tags = "套餐相关接口 ")
 public class SetmealController {
 
 
@@ -48,7 +50,7 @@ public class SetmealController {
      * @return
      */
     @PostMapping
-    @CacheEvict(value = "setmealCache",allEntries = true)
+    @CacheEvict(value = "setmealCache", allEntries = true)
     public R<String> save(@RequestBody SetmealDto setmealDto) {
 
         setmealService.saveWithDish(setmealDto);
@@ -100,12 +102,13 @@ public class SetmealController {
 
     /**
      * 删除套餐
-     *allEntries = true  清理setmealCache下所有的数据
+     * allEntries = true  清理setmealCache下所有的数据
+     *
      * @param ids
      * @return
      */
     @DeleteMapping
-    @CacheEvict(value = "setmealCache",allEntries = true)
+    @CacheEvict(value = "setmealCache", allEntries = true)
     public R<String> delete(@RequestParam List<Long> ids) {
         log.info("ids:{}", ids);
 

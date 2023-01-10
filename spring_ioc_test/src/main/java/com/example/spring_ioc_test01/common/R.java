@@ -2,6 +2,8 @@ package com.example.spring_ioc_test01.common;
 
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,8 +15,10 @@ import java.util.Map;
  * @param <T>
  */
 @Data
+@ApiModel("返回结果")
 public class R<T> implements Serializable {
 
+    @ApiModelProperty("编码")
     private Integer code; //编码：1成功，0和其它数字为失败
 
     private String msg; //错误信息

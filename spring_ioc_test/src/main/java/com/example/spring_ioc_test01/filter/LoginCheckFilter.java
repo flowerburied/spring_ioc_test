@@ -45,7 +45,11 @@ public class LoginCheckFilter implements Filter {
                 "/user/login",  //移动端登录
                 "/redisUser/*",
                 "/jdbcUser/*",
-                "/**"
+                "/**",
+                "/doc.html", //swagger 请求路径
+                "/webjars/**",
+                "/swagger-resources",
+                "/v2/api-docs",
 
         };
 
